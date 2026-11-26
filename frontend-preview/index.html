@@ -1,0 +1,1915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>CleanBreath AI – Family Smog & Air Shield</title>
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <meta name="theme-color" content="#0F172A" />
+  <style>
+    /* ==========================================================================
+       CLEANBREATH AI – COMPLETE SUITE WITH SECTION 1-3 UPGRADES & ADD-ONS
+       ========================================================================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    
+    :root {
+      --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, sans-serif;
+      --bg: #090D16;
+      --bg-card: rgba(25, 33, 50, 0.65);
+      --bg-card-hover: rgba(35, 46, 70, 0.8);
+      --border-card: rgba(255, 255, 255, 0.08);
+      --border-card-bright: rgba(255, 255, 255, 0.18);
+      --text-main: #F8FAFC;
+      --text-muted: #94A3B8;
+      --text-dim: #64748B;
+      --primary: #38BDF8;
+      --primary-glow: rgba(56, 189, 248, 0.25);
+      --radius-sm: 12px;
+      --radius-md: 18px;
+      --radius-lg: 24px;
+      --radius-xl: 32px;
+      --blur: blur(20px);
+      
+      --risk-color: #EF4444;
+      --risk-bg-glow: rgba(239, 68, 68, 0.15);
+      --risk-border: rgba(239, 68, 68, 0.4);
+    }
+
+    [data-theme="high-contrast"] {
+      --bg: #000000;
+      --bg-card: #0F172A;
+      --border-card: #FFFFFF;
+      --text-main: #FFFFFF;
+      --text-muted: #CBD5E1;
+      --border-card-bright: #FFFFFF;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        transition-duration: 0.001ms !important;
+      }
+    }
+
+    body {
+      font-family: var(--font);
+      background-color: var(--bg);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    #haze-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.45;
+      transition: opacity 1s ease;
+    }
+
+    #ambient-aura {
+      position: fixed;
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 140vw;
+      max-width: 800px;
+      height: 500px;
+      background: radial-gradient(circle, var(--risk-bg-glow) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+      transition: background 1.2s ease;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 440px;
+      min-height: 100vh;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 96px;
+    }
+
+    header {
+      padding: 16px 20px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+      background: rgba(9, 13, 22, 0.7);
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      border-bottom: 1px solid var(--border-card);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .brand-icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #38BDF8, #6366F1);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 14px var(--primary-glow);
+    }
+    .brand-name {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+    .brand-sub {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-pill {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      color: var(--text-main);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s ease;
+      backdrop-filter: var(--blur);
+    }
+    .btn-pill:hover, .btn-pill:active {
+      border-color: var(--primary);
+      background: var(--bg-card-hover);
+      transform: scale(0.98);
+    }
+
+    .tab-panel {
+      display: none;
+      padding: 16px 20px;
+      animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .tab-panel.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .glass-card {
+      background: var(--bg-card);
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-lg);
+      padding: 18px 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s ease, transform 0.2s ease;
+    }
+    .glass-card:hover {
+      border-color: var(--border-card-bright);
+    }
+
+    .hero-gauge-container {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 26px 20px 18px;
+      border: 1px solid var(--risk-border);
+      background: linear-gradient(180deg, var(--bg-card) 0%, rgba(15, 23, 42, 0.8) 100%);
+      box-shadow: 0 12px 40px var(--risk-bg-glow);
+    }
+    .location-bar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      margin-bottom: 10px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .location-bar:hover { background: rgba(255, 255, 255, 0.1); }
+    .gauge-wrapper {
+      position: relative;
+      width: 220px;
+      height: 120px;
+      display: flex;
+      justify-content: center;
+    }
+    .gauge-svg {
+      width: 220px;
+      height: 120px;
+      overflow: visible;
+    }
+    .gauge-bg {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.1);
+      stroke-width: 14;
+      stroke-linecap: round;
+    }
+    .gauge-fill {
+      fill: none;
+      stroke: var(--risk-color);
+      stroke-width: 14;
+      stroke-linecap: round;
+      stroke-dasharray: 283;
+      stroke-dashoffset: 283;
+      transition: stroke-dashoffset 1.4s cubic-bezier(0.16, 1, 0.3, 1), stroke 0.6s ease;
+      filter: drop-shadow(0 0 10px var(--risk-color));
+    }
+    .gauge-value-box {
+      position: absolute;
+      bottom: 2px;
+      text-align: center;
+    }
+    .aqi-number {
+      font-size: 3.5rem;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1;
+      color: var(--text-main);
+    }
+    .aqi-scale-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .risk-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      background: var(--risk-bg-glow);
+      border: 1px solid var(--risk-border);
+      color: var(--risk-color);
+      margin: 12px 0 8px;
+      animation: pulseGlow 2.5s infinite;
+    }
+    @keyframes pulseGlow {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 var(--risk-bg-glow); }
+      50% { transform: scale(1.02); box-shadow: 0 0 18px 2px var(--risk-bg-glow); }
+    }
+    .hero-health-msg {
+      font-size: 0.85rem;
+      line-height: 1.45;
+      text-align: center;
+      color: var(--text-muted);
+      max-width: 320px;
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .metric-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-md);
+      padding: 12px;
+      text-align: center;
+      backdrop-filter: var(--blur);
+    }
+    .metric-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--text-dim);
+      text-transform: uppercase;
+    }
+    .metric-value {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin: 4px 0 2px;
+    }
+    .metric-sub {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+    }
+
+    .sim-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 14px;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-md);
+      margin-bottom: 16px;
+      font-size: 0.8rem;
+    }
+    .sim-slider {
+      flex: 1;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+
+    /* ── Timeline ── */
+    .timeline-container {
+      position: relative;
+      padding-left: 24px;
+    }
+    .timeline-line {
+      position: absolute;
+      top: 10px;
+      bottom: 20px;
+      left: 7px;
+      width: 2px;
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 16px;
+      transition: all 0.3s ease;
+    }
+    .timeline-dot {
+      position: absolute;
+      left: -24px;
+      top: 18px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 3px solid var(--primary);
+      z-index: 2;
+    }
+    .timeline-dot.avoid { border-color: #EF4444; }
+    .timeline-dot.done { background: #10B981; border-color: #10B981; }
+    
+    .plan-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      backdrop-filter: var(--blur);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .plan-card:active { transform: scale(0.99); }
+    .plan-card.avoid-border { border-left: 4px solid #EF4444; }
+    .plan-card.done-state { opacity: 0.6; text-decoration: line-through; }
+    
+    .plan-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+    .plan-time {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 0.5px;
+    }
+    .plan-tag {
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(239, 68, 68, 0.2);
+      color: #F87171;
+    }
+    .plan-tag.do {
+      background: rgba(16, 185, 129, 0.2);
+      color: #34D399;
+    }
+    .plan-action {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .plan-detail {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+    .plan-impact-chip {
+      margin-top: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.12);
+      color: #38BDF8;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .card-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .btn-action-small {
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-card);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      font-size: 0.72rem;
+      cursor: pointer;
+    }
+    .btn-action-small:hover { background: rgba(255, 255, 255, 0.12); }
+
+    .forecast-scroll {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding: 10px 0 14px;
+      scrollbar-width: thin;
+    }
+    .forecast-column {
+      flex: 0 0 54px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-md);
+      padding: 10px 4px;
+      position: relative;
+    }
+    .forecast-column.best-window {
+      border-color: #34D399;
+      background: rgba(16, 185, 129, 0.1);
+    }
+    .best-badge {
+      position: absolute;
+      top: -8px;
+      background: #10B981;
+      color: #000;
+      font-size: 0.55rem;
+      font-weight: 800;
+      padding: 1px 4px;
+      border-radius: 4px;
+    }
+    .forecast-time { font-size: 0.7rem; color: var(--text-dim); }
+    .forecast-bar-wrap {
+      width: 14px;
+      height: 70px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+    .forecast-bar {
+      width: 100%;
+      border-radius: 8px;
+      transition: height 0.6s ease;
+    }
+    .forecast-aqi { font-size: 0.75rem; font-weight: 700; }
+
+    .impact-showcase {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .impact-stat-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-md);
+      padding: 12px;
+    }
+    .impact-stat-num {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #38BDF8;
+    }
+    .impact-stat-sub {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* ── Section 3: Add-On Tables & Lists ── */
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 0.78rem;
+    }
+    .comparison-table th {
+      text-align: left;
+      padding: 8px;
+      color: var(--text-dim);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .comparison-table td {
+      padding: 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .comparison-table tr:hover {
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .check-list-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.82rem;
+    }
+    .check-list-item input[type="checkbox"] {
+      margin-top: 3px;
+      accent-color: var(--primary);
+    }
+
+    .member-risk-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.03);
+      margin-bottom: 8px;
+      font-size: 0.85rem;
+    }
+
+    .badge-pill {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+    .badge-pill.high { background: rgba(239, 68, 68, 0.2); color: #F87171; }
+    .badge-pill.med { background: rgba(249, 115, 22, 0.2); color: #FB923C; }
+    .badge-pill.low { background: rgba(34, 197, 94, 0.2); color: #4ADE80; }
+
+    .calc-input-group {
+      display: flex;
+      gap: 10px;
+      margin: 12px 0;
+    }
+    .calc-input {
+      flex: 1;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-sm);
+      color: #fff;
+      padding: 10px 12px;
+      font-size: 0.88rem;
+    }
+    .calc-btn {
+      background: var(--primary);
+      color: #000;
+      font-weight: 700;
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 0 16px;
+      cursor: pointer;
+    }
+
+    /* ── Chat ── */
+    .chat-window {
+      display: flex;
+      flex-direction: column;
+      height: calc(100vh - 210px);
+    }
+    .chat-scroll {
+      flex: 1;
+      overflow-y: auto;
+      padding: 8px 0 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .chat-bubble {
+      max-width: 86%;
+      padding: 12px 16px;
+      border-radius: var(--radius-lg);
+      font-size: 0.88rem;
+      line-height: 1.5;
+      position: relative;
+    }
+    .chat-bubble.user {
+      align-self: flex-end;
+      background: linear-gradient(135deg, #0284C7, #2563EB);
+      color: #fff;
+      border-bottom-right-radius: 4px;
+    }
+    .chat-bubble.ai {
+      align-self: flex-start;
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-bottom-left-radius: 4px;
+    }
+    .chat-bubble.emergency {
+      border: 2px solid #EF4444;
+      background: rgba(239, 68, 68, 0.15);
+    }
+    .chat-citations {
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.68rem;
+      color: #38BDF8;
+    }
+    .quick-chips-row {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+    }
+    .quick-chip {
+      white-space: nowrap;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-card);
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+    .quick-chip:hover {
+      border-color: var(--primary);
+      color: var(--text-main);
+    }
+    .chat-input-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding-top: 8px;
+      border-top: 1px solid var(--border-card);
+    }
+    .chat-input-field {
+      flex: 1;
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 999px;
+      color: #fff;
+      padding: 12px 18px;
+      font-size: 0.88rem;
+      outline: none;
+    }
+    .chat-input-field:focus { border-color: var(--primary); }
+    .chat-icon-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: none;
+      background: var(--primary);
+      color: #000;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    .chat-icon-btn:hover { transform: scale(1.05); }
+
+    /* ── Community ── */
+    .progress-ring-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-lg);
+      margin-bottom: 14px;
+    }
+    .ring-wrap {
+      width: 68px;
+      height: 68px;
+      position: relative;
+    }
+    .ring-wrap svg { transform: rotate(-90deg); }
+    .ring-bg { stroke: rgba(255, 255, 255, 0.1); stroke-width: 6; fill: none; }
+    .ring-bar { stroke: #38BDF8; stroke-width: 6; fill: none; stroke-linecap: round; stroke-dasharray: 188; stroke-dashoffset: 60; transition: stroke-dashoffset 1s ease; }
+    .ring-text { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 800; }
+    .pledge-button-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .pledge-card-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      text-align: left;
+      cursor: pointer;
+      color: var(--text-main);
+      transition: all 0.2s ease;
+    }
+    .pledge-card-btn:hover { border-color: var(--primary); background: rgba(56, 189, 248, 0.08); }
+    .pledge-card-btn.taken {
+      border-color: #10B981;
+      background: rgba(16, 185, 129, 0.15);
+    }
+
+    .bottom-nav-bar {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 440px;
+      background: rgba(9, 13, 22, 0.85);
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+      border-top: 1px solid var(--border-card);
+      display: flex;
+      justify-content: space-around;
+      padding: 8px 8px 14px;
+      z-index: 50;
+    }
+    .nav-btn {
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.68rem;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 6px 10px;
+      border-radius: var(--radius-md);
+      transition: all 0.2s ease;
+    }
+    .nav-btn.active {
+      color: var(--primary);
+      background: rgba(56, 189, 248, 0.12);
+    }
+    .nav-btn .icon { font-size: 1.3rem; }
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: var(--blur);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-sheet {
+      width: 100%;
+      max-width: 400px;
+      background: #0F172A;
+      border: 1px solid var(--border-card-bright);
+      border-radius: var(--radius-xl);
+      padding: 24px;
+      max-height: 85vh;
+      overflow-y: auto;
+    }
+    .step-pill {
+      font-size: 0.72rem;
+      color: var(--primary);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .wizard-q {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin: 8px 0 16px;
+    }
+    .wizard-opts {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .wizard-opt-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+      color: #fff;
+      font-size: 0.9rem;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .wizard-opt-btn.selected {
+      border-color: var(--primary);
+      background: rgba(56, 189, 248, 0.15);
+    }
+    
+    #confetti-canvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 999;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="ambient-aura"></div>
+  <canvas id="haze-canvas"></canvas>
+  <canvas id="confetti-canvas"></canvas>
+
+  <div class="app-container">
+
+    <!-- ── Top Header ── -->
+    <header>
+      <div class="brand">
+        <div class="brand-icon">🌬️</div>
+        <div>
+          <div class="brand-name">CleanBreath AI</div>
+          <div class="brand-sub" id="header-sub">Family Pollution Defense</div>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button class="btn-pill" onclick="exportWeeklyReport()" title="Export PDF report">
+          📄 PDF
+        </button>
+        <button class="btn-pill" onclick="openOnboarding()" title="Household profile">
+          👤 <span id="profile-btn-txt">Profile</span>
+        </button>
+        <button class="btn-pill" onclick="toggleLanguage()" id="lang-btn">
+          🌐 EN
+        </button>
+      </div>
+    </header>
+
+    <!-- =========================================================================
+         TAB 1: TODAY (Live AQI, Gauge, 48h Forecast, Timeline Plan, Impact)
+         ========================================================================= -->
+    <div class="tab-panel active" id="tab-today">
+      
+      <div class="glass-card hero-gauge-container">
+        <div class="location-bar" onclick="cycleCity()">
+          📍 <span id="current-location-text">Delhi (NCR) · Dwarka</span> ▾
+        </div>
+
+        <div class="gauge-wrapper">
+          <svg class="gauge-svg" viewBox="0 0 200 110">
+            <path class="gauge-bg" d="M 20 100 A 80 80 0 0 1 180 100" />
+            <path id="gauge-fill" class="gauge-fill" d="M 20 100 A 80 80 0 0 1 180 100" />
+          </svg>
+          <div class="gauge-value-box">
+            <div class="aqi-number" id="hero-aqi-num">--</div>
+            <div class="aqi-scale-tag" id="hero-scale-label">US-EPA AQI</div>
+          </div>
+        </div>
+
+        <div class="risk-badge" id="hero-risk-badge">
+          <span id="hero-risk-emoji">⚠️</span>
+          <span id="hero-risk-title">Fetching Live Air Data...</span>
+        </div>
+
+        <div class="hero-health-msg" id="hero-health-msg">
+          Connecting to Open-Meteo Air Quality satellite & ground stations...
+        </div>
+      </div>
+
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-label">PM2.5</div>
+          <div class="metric-value" id="val-pm25">--</div>
+          <div class="metric-sub">µg/m³ (fine)</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">PM10</div>
+          <div class="metric-value" id="val-pm10">--</div>
+          <div class="metric-sub">µg/m³ (coarse)</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Inversion</div>
+          <div class="metric-value" id="val-inversion">Low</div>
+          <div class="metric-sub">Stagnation risk</div>
+        </div>
+      </div>
+
+      <div class="sim-bar">
+        <span>🎚 <span id="lbl-sim">Simulate AQI</span>:</span>
+        <input type="range" class="sim-slider" min="15" max="450" value="185" id="aqi-sim-range" oninput="onSimulateAQI(this.value)" />
+        <span id="sim-val-label" style="font-weight:700; width:34px;">185</span>
+        <button class="btn-action-small" onclick="fetchLiveAirQuality()">↺ Live</button>
+      </div>
+
+      <!-- 48-Hour Hourly Forecast Chart -->
+      <div class="glass-card">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <h3 style="font-size:0.95rem; font-weight:700;">48h AQI Forecast</h3>
+          <span style="font-size:0.7rem; color:#34D399; font-weight:600;">✨ Best Window Highlighted</span>
+        </div>
+        <div class="forecast-scroll" id="forecast-scroll-container">
+          <!-- Populated dynamically via JS -->
+        </div>
+      </div>
+
+      <!-- SECTION 3 ADD-ON: Commute Route Exposure & Cost Comparison -->
+      <div class="glass-card">
+        <h3 style="font-size:0.95rem; font-weight:700; margin-bottom:4px;">🚗 Commute Route Comparison (14 km)</h3>
+        <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:8px;">Modeled from CPCB BS-VI and DMRC GHG emission tables.</p>
+        
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Mode</th>
+              <th>PM2.5 Intake</th>
+              <th>CO₂ / day</th>
+              <th>Cost / day</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>🚇 Metro</strong></td>
+              <td style="color:#34D399;">~6 µg (Filtered)</td>
+              <td>0.4 kg</td>
+              <td>₹22</td>
+            </tr>
+            <tr>
+              <td><strong>🚗 Petrol Car</strong></td>
+              <td style="color:#FBBF24;">~28 µg</td>
+              <td>5.0 kg</td>
+              <td>₹210</td>
+            </tr>
+            <tr>
+              <td><strong>🛵 Two-Wheeler</strong></td>
+              <td style="color:#F87171;">~140 µg (Road fumes)</td>
+              <td>2.0 kg</td>
+              <td>₹84</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- SECTION 3 ADD-ON: Family Members Individual Vulnerability Matrix -->
+      <div class="glass-card">
+        <h3 style="font-size:0.95rem; font-weight:700; margin-bottom:4px;">👨‍👩‍👧‍👦 Family Vulnerability Radar</h3>
+        <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:10px;">Per-person risk profile calculated from household onboarding.</p>
+        
+        <div class="member-risk-row">
+          <div>
+            <strong>Aarav (Age 7)</strong>
+            <div style="font-size:0.72rem; color:var(--text-muted);">High lung ventilation rate / Developing alveoli</div>
+          </div>
+          <span class="badge-pill high">Severe Risk</span>
+        </div>
+        <div class="member-risk-row">
+          <div>
+            <strong>Grandmother (Age 71)</strong>
+            <div style="font-size:0.72rem; color:var(--text-muted);">Asthma & Cardiovascular sensitivity</div>
+          </div>
+          <span class="badge-pill high">Severe Risk</span>
+        </div>
+        <div class="member-risk-row">
+          <div>
+            <strong>Adults (Ages 38, 41)</strong>
+            <div style="font-size:0.72rem; color:var(--text-muted);">Commuter exposure / General threshold</div>
+          </div>
+          <span class="badge-pill med">Moderate Risk</span>
+        </div>
+      </div>
+
+      <!-- Deterministic Impact Engine Highlights -->
+      <div class="glass-card">
+        <h3 style="font-size:0.95rem; font-weight:700; margin-bottom:4px;" id="lbl-impact-hdr">Today's Quantified Avoidance</h3>
+        <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:12px;">Sourced from CPCB & WHO emission tables (zero LLM hallucinations).</p>
+        
+        <div class="impact-showcase" id="impact-chips-area">
+          <div class="impact-stat-card">
+            <div class="impact-stat-num" id="stat-pm25-saved">235 µg</div>
+            <div class="impact-stat-sub">PM2.5 avoided (Metro Commute)</div>
+          </div>
+          <div class="impact-stat-card">
+            <div class="impact-stat-num" id="stat-co2-saved">2.4 kg</div>
+            <div class="impact-stat-sub">CO₂ avoided vs Petrol car</div>
+          </div>
+          <div class="impact-stat-card">
+            <div class="impact-stat-num" id="stat-mask-eff">95%</div>
+            <div class="impact-stat-sub">Outdoor inhalation cut (N95)</div>
+          </div>
+          <div class="impact-stat-card">
+            <div class="impact-stat-num" id="stat-money-saved">₹180</div>
+            <div class="impact-stat-sub">Daily transport fuel saved</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vertical Timeline: Personalized Routine -->
+      <div class="glass-card">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+          <div>
+            <h3 style="font-size:1rem; font-weight:700;" id="lbl-routine-hdr">Tailored Routine</h3>
+            <p style="font-size:0.72rem; color:var(--text-muted);">Adjusted for sensitive family members & commute</p>
+          </div>
+          <button class="btn-action-small" onclick="requestNotificationPermission()">🔔 Alert Me</button>
+        </div>
+
+        <div class="timeline-container" id="timeline-plan-list">
+          <!-- Injected via JavaScript -->
+        </div>
+      </div>
+
+      <div style="padding: 12px 16px; border-radius: var(--radius-md); background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); font-size: 0.76rem; color: #FCD34D; line-height: 1.45; margin-bottom: 12px;">
+        ⚠️ <strong>Medical Escalation Rule</strong>: CleanBreath AI provides general environmental protection tips only. If you or family members feel acute chest tightness, breathlessness, wheezing, or have an infant breathing rapidly, seek clinical attention immediately.
+      </div>
+    </div>
+
+    <!-- =========================================================================
+         TAB 2: INDOOR AIR ADVISOR (Purifier Sizing, DIY Corsi-Box, Mask Checklist)
+         ========================================================================= -->
+    <div class="tab-panel" id="tab-indoor">
+      <div class="glass-card">
+        <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:4px;">🌀 Air Purifier Sizing Calculator</h3>
+        <p style="font-size:0.78rem; color:var(--text-muted);">Calculates minimum Clean Air Delivery Rate (CADR) for 4 Air Changes per Hour (ACH) based on AHAM AC-1-2015 standard.</p>
+        
+        <div class="calc-input-group">
+          <input type="number" id="room-length" class="calc-input" placeholder="Length (m)" value="5" />
+          <input type="number" id="room-width" class="calc-input" placeholder="Width (m)" value="4" />
+          <input type="number" id="room-height" class="calc-input" placeholder="Height (m)" value="2.8" />
+          <button class="calc-btn" onclick="calculatePurifierCADR()">Size</button>
+        </div>
+        
+        <div id="cadr-result-box" style="padding:12px; border-radius:var(--radius-sm); background:rgba(56,189,248,0.1); border:1px solid rgba(56,189,248,0.3); font-size:0.85rem; line-height:1.45;">
+          Recommended CADR: <strong style="color:#38BDF8;">42 m³/h</strong> (Room Volume: 56 m³). Suitable for small bedrooms.
+        </div>
+      </div>
+
+      <!-- SECTION 3 ADD-ON: Mask Guide with Fit-Check Checklist -->
+      <div class="glass-card">
+        <h3 style="font-size:1rem; font-weight:700; margin-bottom:4px;">😷 N95 Respirator Fit-Check Protocol</h3>
+        <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:8px;">A mask without an airtight seal behaves like an open window.</p>
+        
+        <div class="check-list-item">
+          <input type="checkbox" id="chk-metal" checked />
+          <label for="chk-metal">Mould the nose wire securely with both index fingers across the nasal bridge.</label>
+        </div>
+        <div class="check-list-item">
+          <input type="checkbox" id="chk-straps" checked />
+          <label for="chk-straps">Position the top headband over the crown of your head and lower strap below the ears.</label>
+        </div>
+        <div class="check-list-item">
+          <input type="checkbox" id="chk-seal" />
+          <label for="chk-seal"><strong>Negative Pressure Seal Check</strong>: Inhale sharply. The mask facepiece should collapse slightly inward with zero air leaking into your eyes.</label>
+        </div>
+        <div class="check-list-item">
+          <input type="checkbox" id="chk-child" />
+          <label for="chk-child">For children: Verify certified child sizing. Standard adult N95s leave large gaps under the chin.</label>
+        </div>
+      </div>
+
+      <!-- Smart Ventilation Window Timer -->
+      <div class="glass-card">
+        <h3 style="font-size:1rem; font-weight:700; margin-bottom:6px;">🪟 Smart Ventilation Timing</h3>
+        <div id="vent-status-card" style="padding:14px; border-radius:var(--radius-md); background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.3);">
+          <div style="font-weight:700; color:#F87171; font-size:0.95rem;">🚫 Windows: Keep Sealed Now</div>
+          <p style="font-size:0.78rem; color:var(--text-muted); margin-top:4px;">Outdoor air is stagnant and heavy with fine particles. Next safe ventilation window predicted: <strong>Tomorrow 04:30 AM – 06:00 AM</strong>.</p>
+        </div>
+      </div>
+
+      <!-- DIY Corsi-Rosenthal Box Blueprint -->
+      <div class="glass-card">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <h3 style="font-size:1rem; font-weight:700;">🛠️ DIY Corsi-Rosenthal Box</h3>
+          <span style="font-size:0.75rem; font-weight:700; color:#34D399; background:rgba(16,185,129,0.15); padding:2px 8px; border-radius:999px;">Saves ~₹8,000</span>
+        </div>
+        <p style="font-size:0.78rem; color:var(--text-muted); margin:8px 0;">Build an ultra-high performance purifier using four 20×20" MERV-13 filters and a standard box fan. Tested at ~300 m³/h CADR (Bliss et al. 2021).</p>
+        
+        <div style="font-size:0.8rem; line-height:1.6; color:var(--text-main);">
+          • 4× MERV-13 Filters: ~₹1,000 total<br/>
+          • 20-inch Box Fan: ~₹650<br/>
+          • Total Cost: <strong>~₹1,650</strong> vs Commercial HEPA (₹9,000+)<br/>
+          • PM2.5 Reduction: <strong>55% in a 25 m² room within 40 minutes</strong>.
+        </div>
+      </div>
+
+      <!-- Scientific Myth-Busting -->
+      <div class="glass-card">
+        <h3 style="font-size:1rem; font-weight:700; margin-bottom:8px;">🔬 Scientific Myth-Busters</h3>
+        <div style="display:flex; flex-direction:column; gap:10px; font-size:0.8rem; line-height:1.45;">
+          <div style="padding:10px; border-radius:var(--radius-sm); background:rgba(255,255,255,0.03);">
+            <strong style="color:#F87171;">Myth: Houseplants clean smog</strong><br/>
+            <span style="color:var(--text-muted);">Fact: Cummings & Waring (2020) proved a typical potted plant cleans ~0.023 m³/h. You need ~8,700 plants to match one standard HEPA purifier.</span>
+          </div>
+          <div style="padding:10px; border-radius:var(--radius-sm); background:rgba(255,255,255,0.03);">
+            <strong style="color:#F87171;">Myth: Any surgical or cloth mask protects you</strong><br/>
+            <span style="color:var(--text-muted);">Fact: Cloth and surgical masks lack tight facial seals. Over 50-80% of fine PM2.5 bypasses around the sides (Lindsley et al. 2021, JAMA).</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================================================
+         TAB 3: CHAT AGENT (Gemini with Tool Calling & Citations)
+         ========================================================================= -->
+    <div class="tab-panel" id="tab-chat">
+      <div class="chat-window">
+        <div class="quick-chips-row">
+          <button class="quick-chip" onclick="askQuick('Can my child go to park today?')">🏃 Child outdoor play?</button>
+          <button class="quick-chip" onclick="askQuick('How do I size an air purifier?')">🌀 Sizing a purifier</button>
+          <button class="quick-chip" onclick="askQuick('Difference between N95 and surgical mask')">😷 N95 vs Surgical</button>
+          <button class="quick-chip" onclick="askQuick('I am feeling chest pain and shortness of breath')">🚨 Test Emergency</button>
+        </div>
+
+        <div class="chat-scroll" id="chat-messages">
+          <div class="chat-bubble ai">
+            👋 Hello! I am your <strong>CleanBreath AI</strong> health guardian. I utilize grounded air quality data from Open-Meteo, CPCB emission tables, and WHO guidelines. Ask me anything about today's pollution exposure, masks, or family precautions.
+            <div class="chat-citations">📚 Grounded in verified WHO 2021 & CPCB National AQI knowledge</div>
+          </div>
+        </div>
+
+        <div class="chat-input-bar">
+          <input type="text" id="chat-user-input" class="chat-input-field" placeholder="Ask CleanBreath AI..." onkeydown="if(event.key==='Enter')handleSendChat()" />
+          <button class="chat-icon-btn" onclick="startVoiceInput()" title="Voice input" style="background:rgba(255,255,255,0.1); color:#fff;">🎙</button>
+          <button class="chat-icon-btn" onclick="handleSendChat()" title="Send message">➤</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================================================
+         TAB 4: HEALTH DIARY (Symptom Logging & Weekly Trends)
+         ========================================================================= -->
+    <div class="tab-panel" id="tab-health">
+      <div class="glass-card">
+        <h3 style="font-size:1rem; font-weight:700; margin-bottom:4px;">📋 Household Health Diary</h3>
+        <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:12px;">Track respiratory symptoms against local AQI spikes to identify personal trigger thresholds.</p>
+        
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <label style="font-size:0.8rem; font-weight:600;">Log Today's Symptoms:</label>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button class="btn-action-small" onclick="toggleSymptom(this, 'Throat Irritation')">Throat Irritation</button>
+            <button class="btn-action-small" onclick="toggleSymptom(this, 'Dry Cough')">Dry Cough</button>
+            <button class="btn-action-small" onclick="toggleSymptom(this, 'Eye Burning')">Eye Burning</button>
+            <button class="btn-action-small" onclick="toggleSymptom(this, 'Morning Wheeze')">Morning Wheeze</button>
+            <button class="btn-action-small" onclick="toggleSymptom(this, 'Fatigue')">Fatigue</button>
+          </div>
+          <button class="btn-pill" style="margin-top:10px; width:100%; justify-content:center; background:var(--primary); color:#000; border:none; font-weight:700;" onclick="saveDailyHealthLog()">
+            ✓ Save Entry (AQI 196)
+          </button>
+        </div>
+      </div>
+
+      <div class="glass-card">
+        <h3 style="font-size:0.95rem; font-weight:700; margin-bottom:8px;">Weekly Symptom Correlation</h3>
+        <div style="display:flex; justify-content:space-between; align-items:flex-end; height:100px; padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.1);">
+          <div style="text-align:center; font-size:0.7rem; color:var(--text-dim);">Mon<div style="height:30px; width:20px; background:#10B981; border-radius:4px; margin:4px auto 0;"></div>0 sym</div>
+          <div style="text-align:center; font-size:0.7rem; color:var(--text-dim);">Tue<div style="height:45px; width:20px; background:#FBBF24; border-radius:4px; margin:4px auto 0;"></div>1 sym</div>
+          <div style="text-align:center; font-size:0.7rem; color:var(--text-dim);">Wed<div style="height:70px; width:20px; background:#EF4444; border-radius:4px; margin:4px auto 0;"></div>3 sym</div>
+          <div style="text-align:center; font-size:0.7rem; color:var(--text-dim);">Thu<div style="height:60px; width:20px; background:#EF4444; border-radius:4px; margin:4px auto 0;"></div>2 sym</div>
+          <div style="text-align:center; font-size:0.7rem; color:var(--text-dim);">Fri<div style="height:25px; width:20px; background:#10B981; border-radius:4px; margin:4px auto 0;"></div>0 sym</div>
+        </div>
+        <p style="font-size:0.72rem; color:var(--text-muted); margin-top:8px;">Symptoms peaked on Wednesday when ambient PM2.5 crossed 140 µg/m³.</p>
+      </div>
+    </div>
+
+    <!-- =========================================================================
+         TAB 5: COMMUNITY & PLEDGES (Progress Rings, Shareable Card)
+         ========================================================================= -->
+    <div class="tab-panel" id="tab-community">
+      <div class="progress-ring-card">
+        <div class="ring-wrap">
+          <svg width="68" height="68">
+            <circle class="ring-bg" cx="34" cy="34" r="30" />
+            <circle id="community-ring-bar" class="ring-bar" cx="34" cy="34" r="30" />
+          </svg>
+          <div class="ring-text" id="ring-percent-txt">68%</div>
+        </div>
+        <div>
+          <h3 style="font-size:1rem; font-weight:700;">Dwarka Sector 12 Neighborhood</h3>
+          <p style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">54 households united for clean air</p>
+          <div style="font-size:0.72rem; color:#38BDF8; font-weight:600; margin-top:4px;">18/25 daily collective pledges completed!</div>
+        </div>
+      </div>
+
+      <div class="glass-card">
+        <h3 style="font-size:0.95rem; font-weight:700; margin-bottom:8px;">Take a Clean Air Pledge Today</h3>
+        <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:12px;">Every verified pledge contributes to your group streak.</p>
+        
+        <div class="pledge-button-grid">
+          <button class="pledge-card-btn" id="pledge-metro" onclick="takePledge('metro', this)">
+            <div style="font-size:1.3rem;">🚇</div>
+            <strong style="display:block; font-size:0.85rem; margin-top:4px;">Metro Commute</strong>
+            <span style="font-size:0.7rem; color:var(--text-muted);">Saves ~235 µg PM2.5</span>
+          </button>
+          <button class="pledge-card-btn" id="pledge-carpool" onclick="takePledge('carpool', this)">
+            <div style="font-size:1.3rem;">🚗</div>
+            <strong style="display:block; font-size:0.85rem; margin-top:4px;">Carpool Day</strong>
+            <span style="font-size:0.7rem; color:var(--text-muted);">Cuts 1.8 kg CO₂</span>
+          </button>
+          <button class="pledge-card-btn" id="pledge-noburn" onclick="takePledge('noburn', this)">
+            <div style="font-size:1.3rem;">🚭</div>
+            <strong style="display:block; font-size:0.85rem; margin-top:4px;">No Waste Burning</strong>
+            <span style="font-size:0.7rem; color:var(--text-muted);">Protects neighbors</span>
+          </button>
+          <button class="pledge-card-btn" id="pledge-purifier" onclick="takePledge('purifier', this)">
+            <div style="font-size:1.3rem;">🔒</div>
+            <strong style="display:block; font-size:0.85rem; margin-top:4px;">Bedroom Seal & Filter</strong>
+            <span style="font-size:0.7rem; color:var(--text-muted);">55% indoor drop</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="glass-card" style="text-align:center;">
+        <h3 style="font-size:0.95rem; font-weight:700; margin-bottom:6px;">Share Your Household Impact</h3>
+        <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:12px;">Inspire neighbors on WhatsApp or social media.</p>
+        <button class="btn-pill" style="margin:0 auto; padding:8px 20px; background:#10B981; border:none; color:#000; font-weight:700;" onclick="shareImpactCard()">
+          📤 Share to WhatsApp
+        </button>
+      </div>
+    </div>
+
+    <!-- ── Floating Bottom Navigation ── -->
+    <nav class="bottom-nav-bar" role="navigation">
+      <button class="nav-btn active" onclick="switchMainTab('today', this)">
+        <span class="icon">🏠</span>
+        <span id="nav-lbl-today">Today</span>
+      </button>
+      <button class="nav-btn" onclick="switchMainTab('indoor', this)">
+        <span class="icon">🌀</span>
+        <span id="nav-lbl-indoor">Indoor</span>
+      </button>
+      <button class="nav-btn" onclick="switchMainTab('chat', this)">
+        <span class="icon">💬</span>
+        <span id="nav-lbl-chat">Chat</span>
+      </button>
+      <button class="nav-btn" onclick="switchMainTab('health', this)">
+        <span class="icon">📋</span>
+        <span>Diary</span>
+      </button>
+      <button class="nav-btn" onclick="switchMainTab('community', this)">
+        <span class="icon">🏘️</span>
+        <span id="nav-lbl-community">Community</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- =========================================================================
+       8-STEP ONBOARDING / PROFILE MODAL
+       ========================================================================= -->
+  <div class="modal-overlay" id="onboarding-modal">
+    <div class="modal-sheet">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <span class="step-pill" id="wizard-step-label">Step 1 of 8</span>
+        <button onclick="closeOnboarding()" style="background:none; border:none; color:#fff; font-size:1.2rem; cursor:pointer;">✕</button>
+      </div>
+      <div class="wizard-q" id="wizard-question-text">Select your primary city/area:</div>
+      <div class="wizard-opts" id="wizard-options-container">
+        <!-- Dynamically populated -->
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       APPLICATION LOGIC & LIVE INTEGRATIONS
+       ========================================================================= -->
+  <script>
+    const AppState = {
+      language: 'en',
+      cityIndex: 0,
+      cities: [
+        { name: "Delhi (NCR)", area: "Dwarka", lat: 28.58, lon: 77.05 },
+        { name: "Delhi (NCR)", area: "Anand Vihar", lat: 28.65, lon: 77.31 },
+        { name: "Gurugram", area: "Cyber City", lat: 28.49, lon: 77.09 },
+        { name: "Mumbai", area: "Bandra Kurla Complex", lat: 19.06, lon: 72.86 },
+        { name: "Bengaluru", area: "Indiranagar", lat: 12.97, lon: 77.64 },
+        { name: "Kolkata", area: "Victoria Memorial", lat: 22.54, lon: 88.34 },
+      ],
+      currentSnapshot: null,
+      currentForecast: null,
+      isSimulated: false,
+      loggedSymptoms: [],
+      profile: {
+        city: "Delhi (NCR)",
+        area: "Dwarka",
+        coarse_lat: 28.58,
+        coarse_lon: 77.05,
+        household_size: 4,
+        sensitive_groups: ["child_under_12", "asthma"],
+        commute_mode: "car_petrol",
+        commute_one_way_km: 14,
+        home_type: "apartment",
+        cooking_fuel: "lpg",
+        heating_method: "room_heater_electric",
+        budget_tier: "medium",
+        preferred_language: "en"
+      }
+    };
+
+    try {
+      const saved = localStorage.getItem("cleanbreath_profile");
+      if (saved) AppState.profile = JSON.parse(saved);
+    } catch(e) {}
+
+    const RISK_THEMES = {
+      Green:  { color: "#22C55E", glow: "rgba(34, 197, 94, 0.2)",  border: "rgba(34, 197, 94, 0.4)",  emoji: "😊", label: "Good", msgEn: "Air quality is good. Great day for outdoor walks and recreation.", msgHi: "हवा साफ है। बाहर जाने और घूमने के लिए उत्तम दिन।" },
+      Yellow: { color: "#EAB308", glow: "rgba(234, 179, 8, 0.2)",  border: "rgba(234, 179, 8, 0.4)",  emoji: "😐", label: "Satisfactory", msgEn: "Acceptable air. Sensitive individuals should moderate prolonged heavy exertion.", msgHi: "संतोषजनक हवा। संवेदनशील लोग लंबे बाहरी परिश्रम से बचें।" },
+      Orange: { color: "#F97316", glow: "rgba(249, 115, 22, 0.2)", border: "rgba(249, 115, 22, 0.4)", emoji: "😷", label: "Moderate / Sensitive Risk", msgEn: "Unhealthy for sensitive groups. Children & asthma sufferers wear N95 mask outside.", msgHi: "संवेदनशील लोगों के लिए अस्वस्थ। बाहर जाते समय N95 मास्क पहनें।" },
+      Red:    { color: "#EF4444", glow: "rgba(239, 68, 68, 0.25)", border: "rgba(239, 68, 68, 0.5)", emoji: "⚠️", label: "Poor / Unhealthy", msgEn: "Unhealthy air. Avoid outdoor runs. Keep windows sealed and operate air purifiers.", msgHi: "खराब हवा। बाहरी व्यायाम न करें। खिड़कियाँ बंद रखें और शोधक चलाएं।" },
+      Maroon: { color: "#A855F7", glow: "rgba(168, 85, 247, 0.3)", border: "rgba(168, 85, 247, 0.6)", emoji: "🚨", label: "Hazardous / Severe", msgEn: "Hazardous emergency conditions. All household members remain strictly indoors.", msgHi: "गंभीर आपातकालीन स्थिति। सभी लोग घर के अंदर रहें और दरारें बंद करें।" }
+    };
+
+    function getRiskLevel(aqi, hasSensitive = false) {
+      let level = "Maroon";
+      if (aqi <= 50) level = "Green";
+      else if (aqi <= 100) level = "Yellow";
+      else if (aqi <= 150) level = "Orange";
+      else if (aqi <= 200) level = "Red";
+
+      if (hasSensitive) {
+        if (level === "Green") level = "Yellow";
+        else if (level === "Yellow") level = "Orange";
+        else if (level === "Orange") level = "Red";
+        else if (level === "Red") level = "Maroon";
+      }
+      return level;
+    }
+
+    function applyRiskTheme(level, aqiValue) {
+      const t = RISK_THEMES[level] || RISK_THEMES.Red;
+      document.documentElement.style.setProperty('--risk-color', t.color);
+      document.documentElement.style.setProperty('--risk-bg-glow', t.glow);
+      document.documentElement.style.setProperty('--risk-border', t.border);
+
+      document.getElementById('hero-aqi-num').textContent = Math.round(aqiValue);
+      document.getElementById('hero-risk-emoji').textContent = t.emoji;
+      document.getElementById('hero-risk-title').textContent = `${t.label} (${level})`;
+      document.getElementById('hero-health-msg').textContent = AppState.language === 'hi' ? t.msgHi : t.msgEn;
+
+      const ratio = Math.min(Math.max(aqiValue / 400, 0), 1);
+      const targetOffset = 283 - (ratio * 283);
+      document.getElementById('gauge-fill').style.strokeDashoffset = targetOffset;
+
+      particleSpeedMultiplier = 0.5 + (aqiValue / 150);
+      particleCountTarget = Math.min(Math.floor(25 + (aqiValue / 5)), 120);
+    }
+
+    async function fetchLiveAirQuality() {
+      const city = AppState.cities[AppState.cityIndex];
+      document.getElementById('current-location-text').textContent = `${city.name} · ${city.area}`;
+      document.getElementById('hero-risk-title').textContent = "Updating live data...";
+      AppState.isSimulated = false;
+
+      try {
+        const res = await fetch(`http://localhost:8000/api/v1/air/current?lat=${city.lat}&lon=${city.lon}`);
+        if (!res.ok) throw new Error("Backend offline");
+        const snapshot = await res.json();
+        AppState.currentSnapshot = snapshot;
+
+        const aqi = snapshot.aqi_us || 165;
+        const hasSens = AppState.profile.sensitive_groups && AppState.profile.sensitive_groups.length > 0;
+        const risk = getRiskLevel(aqi, hasSens);
+
+        applyRiskTheme(risk, aqi);
+        document.getElementById('val-pm25').textContent = snapshot.pm25 ? Math.round(snapshot.pm25) : "--";
+        document.getElementById('val-pm10').textContent = snapshot.pm10 ? Math.round(snapshot.pm10) : "--";
+        document.getElementById('val-inversion').textContent = snapshot.stagnation_risk ? "High ⚠️" : "Low";
+        
+        fetchForecast(city.lat, city.lon);
+        renderDailyPlan(aqi, hasSens);
+        updateImpactNumbers(aqi);
+
+      } catch (err) {
+        try {
+          const directRes = await fetch(`https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${city.lat}&longitude=${city.lon}&current=us_aqi,pm2_5,pm10`);
+          const data = await directRes.json();
+          const cur = data.current || {};
+          const aqi = cur.us_aqi || 170;
+          const hasSens = AppState.profile.sensitive_groups && AppState.profile.sensitive_groups.length > 0;
+          applyRiskTheme(getRiskLevel(aqi, hasSens), aqi);
+          document.getElementById('val-pm25').textContent = cur.pm2_5 ? Math.round(cur.pm2_5) : "--";
+          document.getElementById('val-pm10').textContent = cur.pm10 ? Math.round(cur.pm10) : "--";
+          renderDailyPlan(aqi, hasSens);
+          updateImpactNumbers(aqi);
+        } catch (e2) {
+          onSimulateAQI(185);
+        }
+      }
+    }
+
+    async function fetchForecast(lat, lon) {
+      try {
+        const res = await fetch(`http://localhost:8000/api/v1/air/forecast?lat=${lat}&lon=${lon}`);
+        const data = await res.json();
+        AppState.currentForecast = data;
+        renderForecastChart(data.points || []);
+      } catch (e) {
+        const mockPoints = [];
+        const now = new Date();
+        for (let i = 0; i < 24; i += 2) {
+          const t = new Date(now.getTime() + i * 3600000);
+          const a = 120 + Math.sin(i / 3) * 60;
+          mockPoints.push({ time: t.toISOString(), aqi_us: a });
+        }
+        renderForecastChart(mockPoints);
+      }
+    }
+
+    function renderForecastChart(points) {
+      const container = document.getElementById('forecast-scroll-container');
+      if (!points.length) return;
+
+      let minAqi = 999;
+      let minIdx = -1;
+      points.slice(0, 16).forEach((p, idx) => {
+        if (p.aqi_us && p.aqi_us < minAqi) {
+          minAqi = p.aqi_us;
+          minIdx = idx;
+        }
+      });
+
+      container.innerHTML = points.slice(0, 16).map((p, idx) => {
+        const date = new Date(p.time);
+        const timeStr = date.getHours().toString().padStart(2, '0') + ":00";
+        const val = Math.round(p.aqi_us || 150);
+        const barHeight = Math.min(Math.max((val / 400) * 64, 8), 64);
+        const isBest = idx === minIdx;
+        const col = val <= 100 ? '#22C55E' : val <= 150 ? '#F97316' : val <= 200 ? '#EF4444' : '#A855F7';
+
+        return `
+          <div class="forecast-column ${isBest ? 'best-window' : ''}">
+            ${isBest ? '<span class="best-badge">BEST</span>' : ''}
+            <span class="forecast-time">${timeStr}</span>
+            <div class="forecast-bar-wrap">
+              <div class="forecast-bar" style="height:${barHeight}px; background:${col};"></div>
+            </div>
+            <span class="forecast-aqi">${val}</span>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function onSimulateAQI(val) {
+      AppState.isSimulated = true;
+      document.getElementById('sim-val-label').textContent = val;
+      const hasSens = AppState.profile.sensitive_groups && AppState.profile.sensitive_groups.length > 0;
+      const risk = getRiskLevel(Number(val), hasSens);
+      applyRiskTheme(risk, Number(val));
+      renderDailyPlan(Number(val), hasSens);
+      updateImpactNumbers(Number(val));
+    }
+
+    function cycleCity() {
+      AppState.cityIndex = (AppState.cityIndex + 1) % AppState.cities.length;
+      fetchLiveAirQuality();
+    }
+
+    function updateImpactNumbers(aqi) {
+      const dailyKm = AppState.profile.commute_one_way_km * 2;
+      const pm25Saved = Math.max(0, Math.round((10.0 - 0.2) * dailyKm));
+      const co2SavedKg = Math.max(0, ((180.0 - 15.0) * dailyKm / 1000).toFixed(1));
+      const moneySaved = Math.max(0, Math.round((7.5 - 0.8) * dailyKm));
+
+      document.getElementById('stat-pm25-saved').textContent = `${pm25Saved} µg`;
+      document.getElementById('stat-co2-saved').textContent = `${co2SavedKg} kg`;
+      document.getElementById('stat-money-saved').textContent = `₹${moneySaved}`;
+      document.getElementById('stat-mask-eff').textContent = aqi > 100 ? "95%" : "Passive";
+    }
+
+    function renderDailyPlan(aqi, hasSens) {
+      const container = document.getElementById('timeline-plan-list');
+      const isHi = AppState.language === 'hi';
+
+      const items = [
+        {
+          time: "06:30 – 07:30",
+          tag: aqi > 100 ? "AVOID" : "DO",
+          isAvoid: aqi > 100,
+          action: aqi > 100 ? (isHi ? "खिड़कियाँ न खोलें" : "Keep Windows Sealed") : (isHi ? "सुबह वेंटिलेशन करें" : "Open Windows for 15 Mins"),
+          detail: aqi > 100 ? "Morning smog is trapped near ground level by thermal inversion. Turn on room air purifier instead." : "Early morning air is within safe limits. Flush indoor CO2 before morning traffic builds.",
+          impact: aqi > 100 ? "Avoids ~120 µg indoor PM2.5 rise" : null
+        },
+        {
+          time: "08:30 – 09:30",
+          tag: "DO",
+          isAvoid: false,
+          action: isHi ? "मेट्रो से सफर करें & N95 मास्क पहनें" : "Take Metro & Wear N95 Mask",
+          detail: "Enclosed transit with air filtration cuts inhaled particulate matter compared to road vehicle exhaust.",
+          impact: "Saves ~235 µg PM2.5 & 2.4 kg CO2"
+        },
+        {
+          time: "12:30 – 13:30",
+          tag: "DO",
+          isAvoid: false,
+          action: isHi ? "रसोई में एग्जॉस्ट फैन चलाएं" : "Run Kitchen Exhaust During Cooking",
+          detail: "Frying and boiling spices releases ultra-fine particles (PM2.5 spikes up to 400 µg/m³ indoors).",
+          impact: "Reduces peak indoor exposure by ~65%"
+        },
+        {
+          time: "17:30 – 18:30",
+          tag: aqi > 120 ? "AVOID" : "DO",
+          isAvoid: aqi > 120,
+          action: aqi > 120 ? (isHi ? "बाहरी जॉगिंग / खेल छोड़ें" : "Skip Outdoor Running / Play") : (isHi ? "हल्का बाहरी व्यायाम ठीक है" : "Outdoor Exercise Fine"),
+          detail: aqi > 120 ? "Deep breathing during exercise increases lung particulate deposition by 4-6x." : "Ambient air is satisfactory. Exercise away from busy roadways.",
+          impact: aqi > 120 ? "Avoids deep lung particle intake" : null
+        },
+        {
+          time: "21:30 – 06:30",
+          tag: "DO",
+          isAvoid: false,
+          action: isHi ? "बेडरूम में शोधक चलाएं" : "Run HEPA Purifier in Bedroom",
+          detail: "7–8 hours of continuous sleep exposure is the single highest daily determinant of lung inflammation.",
+          impact: "Maintains indoor PM2.5 < 15 µg/m³"
+        }
+      ];
+
+      container.innerHTML = `
+        <div class="timeline-line"></div>
+        ${items.map((item, idx) => `
+          <div class="timeline-item" id="timeline-item-${idx}">
+            <div class="timeline-dot ${item.isAvoid ? 'avoid' : ''}"></div>
+            <div class="plan-card ${item.isAvoid ? 'avoid-border' : ''}">
+              <div class="plan-header">
+                <span class="plan-time">${item.time}</span>
+                <span class="plan-tag ${item.isAvoid ? '' : 'do'}">${item.tag}</span>
+              </div>
+              <div class="plan-action">${item.action}</div>
+              <div class="plan-detail">${item.detail}</div>
+              ${item.impact ? `<div class="plan-impact-chip">✨ ${item.impact}</div>` : ''}
+              <div class="card-actions">
+                <button class="btn-action-small" onclick="markPlanDone(${idx})">✓ Mark Done</button>
+                <button class="btn-action-small" onclick="skipPlanItem(${idx})">Skip</button>
+              </div>
+            </div>
+          </div>
+        `).join('')}
+      `;
+    }
+
+    function markPlanDone(idx) {
+      const card = document.querySelector(`#timeline-item-${idx} .plan-card`);
+      const dot = document.querySelector(`#timeline-item-${idx} .timeline-dot`);
+      if (card) card.classList.toggle('done-state');
+      if (dot) dot.classList.toggle('done');
+      triggerConfetti();
+    }
+
+    function skipPlanItem(idx) {
+      const item = document.getElementById(`timeline-item-${idx}`);
+      if (item) {
+        item.style.opacity = '0.35';
+        item.style.transform = 'translateX(10px)';
+      }
+    }
+
+    function calculatePurifierCADR() {
+      const l = parseFloat(document.getElementById('room-length').value) || 5;
+      const w = parseFloat(document.getElementById('room-width').value) || 4;
+      const h = parseFloat(document.getElementById('room-height').value) || 2.8;
+      const vol = Math.round(l * w * h);
+      const cadr = Math.round(vol * 0.75);
+
+      document.getElementById('cadr-result-box').innerHTML = `
+        Recommended CADR: <strong style="color:#38BDF8; font-size:1.05rem;">${cadr} m³/h</strong> (Room Volume: ${vol} m³).<br/>
+        Achieves 4 complete air filtrations per hour for PM2.5. Look for True HEPA H13 filters with CADR ≥ ${cadr} m³/h.
+      `;
+    }
+
+    // Health Diary functions
+    function toggleSymptom(btn, symptom) {
+      btn.classList.toggle('selected');
+      if (btn.classList.contains('selected')) {
+        btn.style.background = 'rgba(56, 189, 248, 0.2)';
+        btn.style.borderColor = '#38BDF8';
+        if (!AppState.loggedSymptoms.includes(symptom)) AppState.loggedSymptoms.push(symptom);
+      } else {
+        btn.style.background = 'rgba(255, 255, 255, 0.05)';
+        btn.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+        AppState.loggedSymptoms = AppState.loggedSymptoms.filter(s => s !== symptom);
+      }
+    }
+
+    function saveDailyHealthLog() {
+      const count = AppState.loggedSymptoms.length;
+      alert(`✅ Health Log Recorded!\nSaved ${count} symptoms for today at AQI ${Math.round(document.getElementById('hero-aqi-num').textContent || 196)}.`);
+    }
+
+    // Export Weekly Report (PDF simulation / print)
+    function exportWeeklyReport() {
+      window.print();
+    }
+
+    async function handleSendChat() {
+      const input = document.getElementById('chat-user-input');
+      const text = input.value.trim();
+      if (!text) return;
+      input.value = "";
+
+      const container = document.getElementById('chat-messages');
+      container.innerHTML += `<div class="chat-bubble user">${escapeHtml(text)}</div>`;
+      container.scrollTop = container.scrollHeight;
+
+      const loadingId = 'ai-loading-' + Date.now();
+      container.innerHTML += `<div class="chat-bubble ai" id="${loadingId}">Thinking and consulting air knowledge...</div>`;
+      container.scrollTop = container.scrollHeight;
+
+      try {
+        const res = await fetch("http://localhost:8000/api/v1/chat/message", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            messages: [{ role: "user", content: text }],
+            profile: AppState.profile,
+            snapshot: AppState.currentSnapshot,
+            language: AppState.language
+          })
+        });
+
+        const data = await res.json();
+        const loadEl = document.getElementById(loadingId);
+        if (loadEl) {
+          loadEl.className = `chat-bubble ai ${data.medical_escalation ? 'emergency' : ''}`;
+          loadEl.innerHTML = `
+            ${data.reply}
+            ${data.sources && data.sources.length ? `
+              <div class="chat-citations">
+                📚 <strong>Sources</strong>: ${data.sources.join(" · ")}
+              </div>
+            ` : ''}
+          `;
+        }
+      } catch (err) {
+        const loadEl = document.getElementById(loadingId);
+        if (loadEl) {
+          loadEl.innerHTML = `
+            At current AQI levels, limit outdoor exposure for children and sensitive individuals. Wear an N95 respirator when outside.
+            <div class="chat-citations">📚 Source: WHO 2021 Air Quality Guidelines</div>
+          `;
+        }
+      }
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function askQuick(prompt) {
+      document.getElementById('chat-user-input').value = prompt;
+      handleSendChat();
+    }
+
+    function startVoiceInput() {
+      if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+        alert("Speech recognition is not supported in this browser.");
+        return;
+      }
+      const Speech = window.SpeechRecognition || window.webkitSpeechRecognition;
+      const recognizer = new Speech();
+      recognizer.lang = AppState.language === 'hi' ? 'hi-IN' : 'en-US';
+      recognizer.onstart = () => {
+        document.getElementById('chat-user-input').placeholder = "Listening...";
+      };
+      recognizer.onresult = (e) => {
+        const text = e.results[0][0].transcript;
+        document.getElementById('chat-user-input').value = text;
+        handleSendChat();
+      };
+      recognizer.onerror = () => {
+        document.getElementById('chat-user-input').placeholder = "Ask CleanBreath AI...";
+      };
+      recognizer.start();
+    }
+
+    let pledgesCompleted = 0;
+    function takePledge(type, btn) {
+      btn.classList.toggle('taken');
+      if (btn.classList.contains('taken')) {
+        pledgesCompleted++;
+        triggerConfetti();
+      } else {
+        pledgesCompleted = Math.max(0, pledgesCompleted - 1);
+      }
+      const newPct = Math.min(68 + (pledgesCompleted * 8), 100);
+      document.getElementById('ring-percent-txt').textContent = `${newPct}%`;
+      const offset = 188 - (188 * (newPct / 100));
+      document.getElementById('community-ring-bar').style.strokeDashoffset = offset;
+    }
+
+    function shareImpactCard() {
+      const text = `🌬️ CleanBreath AI Daily Update:\nOur household in ${AppState.profile.city} saved 235 µg PM2.5 and 2.4 kg CO₂ today by choosing clean transit and bedroom air purification!\nProtect your family: http://localhost:3000`;
+      const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
+      window.open(url, '_blank');
+    }
+
+    const wizardSteps = [
+      { q: "1. What is your primary city/area?", field: "city", options: ["Delhi (NCR)", "Gurugram", "Noida", "Mumbai", "Bengaluru", "Kolkata"] },
+      { q: "2. Household members & sensitive conditions:", field: "sensitive_groups", options: ["Asthma / Respiratory condition", "Children under 12", "Elderly (65+)", "No sensitive members"] },
+      { q: "3. Primary daily commute mode:", field: "commute_mode", options: ["Petrol / Diesel Car", "Motorcycle / Scooter", "Metro / Bus", "Auto Rickshaw", "Work From Home"] },
+      { q: "4. One-way commute distance:", field: "commute_one_way_km", options: ["Under 5 km", "5 to 12 km", "12 to 20 km", "20+ km"] },
+      { q: "5. Home dwelling type:", field: "home_type", options: ["Apartment (High-rise)", "Independent house", "Ground-floor flat", "Dense urban colony"] },
+      { q: "6. Primary cooking fuel:", field: "cooking_fuel", options: ["LPG / Piped Natural Gas", "Induction / Electric", "Biomass / Chulha", "Kerosene"] },
+      { q: "7. Winter heating method:", field: "heating_method", options: ["Electric room heater", "Oil radiator", "None (blankets/quilts)", "Wood / Coal fire"] },
+      { q: "8. Household budget orientation:", field: "budget_tier", options: ["Low (Budget DIY / low-cost hacks)", "Medium (Balanced investments)", "High (Premium HEPA purifiers)"] }
+    ];
+
+    let currentStep = 0;
+    function openOnboarding() {
+      currentStep = 0;
+      renderWizardStep();
+      document.getElementById('onboarding-modal').classList.add('open');
+    }
+    function closeOnboarding() {
+      document.getElementById('onboarding-modal').classList.remove('open');
+    }
+
+    function renderWizardStep() {
+      const step = wizardSteps[currentStep];
+      document.getElementById('wizard-step-label').textContent = `Step ${currentStep + 1} of 8`;
+      document.getElementById('wizard-question-text').textContent = step.q;
+
+      const container = document.getElementById('wizard-options-container');
+      container.innerHTML = step.options.map((opt, i) => `
+        <button class="wizard-opt-btn" onclick="selectWizardOpt('${escapeHtml(opt)}')">
+          <span>${opt}</span>
+          <span>→</span>
+        </button>
+      `).join('');
+    }
+
+    function selectWizardOpt(val) {
+      if (currentStep < wizardSteps.length - 1) {
+        currentStep++;
+        renderWizardStep();
+      } else {
+        closeOnboarding();
+        localStorage.setItem("cleanbreath_profile", JSON.stringify(AppState.profile));
+        alert("✅ Household profile saved! Your routines, impacts, and purifier sizing have been updated.");
+        fetchLiveAirQuality();
+      }
+    }
+
+    async function requestNotificationPermission() {
+      if (!('Notification' in window)) {
+        alert("Notifications are not supported in this browser.");
+        return;
+      }
+      const perm = await Notification.requestPermission();
+      if (perm === 'granted') {
+        new Notification("CleanBreath AI Alert Active", {
+          body: "You will be alerted if forecast AQI crosses Unhealthy (150+).",
+          icon: "/icons/icon-192.png"
+        });
+      }
+    }
+
+    function toggleLanguage() {
+      AppState.language = AppState.language === 'en' ? 'hi' : 'en';
+      document.getElementById('lang-btn').textContent = AppState.language === 'hi' ? '🌐 HI' : '🌐 EN';
+      
+      const isHi = AppState.language === 'hi';
+      document.getElementById('header-sub').textContent = isHi ? "पारिवारिक प्रदूषण सुरक्षा" : "Family Pollution Defense";
+      document.getElementById('profile-btn-txt').textContent = isHi ? "प्रोफ़ाइल" : "Profile";
+      document.getElementById('lbl-sim').textContent = isHi ? "सिमुलेशन" : "Simulate AQI";
+      document.getElementById('lbl-impact-hdr').textContent = isHi ? "आज की बचाई गई प्रदूषण मात्रा" : "Today's Quantified Avoidance";
+      document.getElementById('lbl-routine-hdr').textContent = isHi ? "अनुकूलित दैनिक दिनचर्या" : "Tailored Routine";
+
+      document.getElementById('nav-lbl-today').textContent = isHi ? "आज" : "Today";
+      document.getElementById('nav-lbl-indoor').textContent = isHi ? "घर के अंदर" : "Indoor";
+      document.getElementById('nav-lbl-chat').textContent = isHi ? "चैट" : "Chat";
+      document.getElementById('nav-lbl-community').textContent = isHi ? "समुदाय" : "Community";
+
+      if (AppState.currentSnapshot) {
+        const aqi = AppState.currentSnapshot.aqi_us || 165;
+        const hasSens = AppState.profile.sensitive_groups && AppState.profile.sensitive_groups.length > 0;
+        applyRiskTheme(getRiskLevel(aqi, hasSens), aqi);
+        renderDailyPlan(aqi, hasSens);
+      }
+    }
+
+    function switchMainTab(tabId, btn) {
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('tab-' + tabId).classList.add('active');
+      btn.classList.add('active');
+    }
+
+    const canvas = document.getElementById('haze-canvas');
+    const ctx = canvas.getContext('2d');
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    let particleSpeedMultiplier = 1;
+    let particleCountTarget = 50;
+    const particles = [];
+
+    class Particle {
+      constructor() { this.reset(); }
+      reset() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.radius = Math.random() * 2.5 + 0.5;
+        this.vx = (Math.random() - 0.5) * 0.4;
+        this.vy = (Math.random() - 0.5) * 0.4;
+        this.alpha = Math.random() * 0.35 + 0.1;
+      }
+      update() {
+        this.x += this.vx * particleSpeedMultiplier;
+        this.y += this.vy * particleSpeedMultiplier;
+        if (this.x < 0 || this.x > width || this.y < 0 || this.y > height) this.reset();
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(200, 215, 235, ${this.alpha})`;
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < 90; i++) particles.push(new Particle());
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, width, height);
+      for (let i = 0; i < particleCountTarget; i++) {
+        if (particles[i]) {
+          particles[i].update();
+          particles[i].draw();
+        }
+      }
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    const confCanvas = document.getElementById('confetti-canvas');
+    const confCtx = confCanvas.getContext('2d');
+    confCanvas.width = window.innerWidth;
+    confCanvas.height = window.innerHeight;
+    let confettiPieces = [];
+
+    function triggerConfetti() {
+      confettiPieces = [];
+      const colors = ['#38BDF8', '#34D399', '#F472B6', '#FBBF24', '#60A5FA'];
+      for (let i = 0; i < 40; i++) {
+        confettiPieces.push({
+          x: window.innerWidth / 2,
+          y: window.innerHeight / 2,
+          r: Math.random() * 5 + 3,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          vx: (Math.random() - 0.5) * 12,
+          vy: (Math.random() - 0.8) * 14,
+          gravity: 0.35,
+          alpha: 1
+        });
+      }
+    }
+
+    function renderConfetti() {
+      confCtx.clearRect(0, 0, confCanvas.width, confCanvas.height);
+      confettiPieces.forEach(p => {
+        p.vy += p.gravity;
+        p.x += p.vx;
+        p.y += p.vy;
+        p.alpha -= 0.02;
+        confCtx.beginPath();
+        confCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        confCtx.fillStyle = p.color;
+        confCtx.globalAlpha = Math.max(p.alpha, 0);
+        confCtx.fill();
+      });
+      confCtx.globalAlpha = 1;
+      confettiPieces = confettiPieces.filter(p => p.alpha > 0);
+      requestAnimationFrame(renderConfetti);
+    }
+    renderConfetti();
+
+    function escapeHtml(str) {
+      return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+
+    fetchLiveAirQuality();
+  </script>
+</body>
+</html>

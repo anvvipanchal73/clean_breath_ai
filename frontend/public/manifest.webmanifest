@@ -1,0 +1,35 @@
+{
+  "name": "CleanBreath AI",
+  "short_name": "CleanBreath",
+  "description": "Air quality guidance for your family",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#F5F5F5",
+  "theme_color": "#1565C0",
+  "lang": "en",
+  "categories": ["health", "lifestyle", "weather"],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Today's Plan",
+      "short_name": "Plan",
+      "url": "/plan",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

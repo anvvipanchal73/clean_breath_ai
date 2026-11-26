@@ -1,0 +1,159 @@
+{
+  "_meta": {
+    "version": "v1",
+    "created": "2026-11-26",
+    "description": "Emission and exposure factors for the CleanBreath AI Impact Engine. All values are sourced from peer-reviewed literature or government reports. NEVER use LLM estimates for numeric claims – always trace to this file.",
+    "currency": "INR",
+    "pm25_unit": "micrograms per cubic metre (µg/m³)",
+    "co2_unit": "kilograms (kg)",
+    "todo": [
+      "Replace placeholder car_diesel_pm25_per_km with ARAI Pune emission test values once accessed.",
+      "Verify motorcycle_petrol_pm25_per_km against BS-VI emission norms.",
+      "Obtain India-specific cooking emission factors from TERI (The Energy and Resources Institute).",
+      "Add region-specific electricity grid emission factor for CO2 (currently India average)."
+    ]
+  },
+  "transport": {
+    "_note": "PM2.5 tailpipe emission factors in µg per vehicle-km. CO2 in grams per vehicle-km. Sources: USEPA MOVES2023 (US), CPCB vehicular emission standards (IN), IPCC AR6 WG3 Ch10.",
+    "car_petrol": {
+      "pm25_ug_per_km": 10.0,
+      "co2_g_per_km": 180.0,
+      "fuel_cost_inr_per_km": 7.5,
+      "assumptions": ["Average small petrol car, BS-VI norms", "Fuel cost at ₹100/L, 13 km/L mileage"],
+      "sources": ["CPCB Vehicular Emission Norms BS-VI 2020", "IPCC AR6 WG3 2022"]
+    },
+    "car_diesel": {
+      "pm25_ug_per_km": 50.0,
+      "co2_g_per_km": 160.0,
+      "fuel_cost_inr_per_km": 6.5,
+      "assumptions": ["Average diesel car, BS-VI; PLACEHOLDER – verify with ARAI test data"],
+      "sources": ["CPCB BS-VI 2020 (placeholder)"]
+    },
+    "car_cng": {
+      "pm25_ug_per_km": 3.0,
+      "co2_g_per_km": 130.0,
+      "fuel_cost_inr_per_km": 3.5,
+      "assumptions": ["CNG car, Delhi CNG price ~₹75/kg, 15 km/kg"],
+      "sources": ["CPCB CNG emission guidelines", "Delhi IGL CNG pricing 2024"]
+    },
+    "car_electric": {
+      "pm25_ug_per_km": 0.5,
+      "co2_g_per_km": 95.0,
+      "fuel_cost_inr_per_km": 1.5,
+      "assumptions": ["Tailpipe PM2.5 from brake/tyre wear only. CO2 from India grid average 0.82 kg CO2/kWh × 0.116 kWh/km.", "Electricity cost at ₹7/kWh, 6 km/kWh"],
+      "sources": ["CEA Grid Emission Factor 2022-23 (0.82 kg CO2/kWh)", "IPCC AR6"]
+    },
+    "motorcycle": {
+      "pm25_ug_per_km": 20.0,
+      "co2_g_per_km": 70.0,
+      "fuel_cost_inr_per_km": 3.0,
+      "assumptions": ["Average 125cc motorcycle, BS-VI", "₹100/L at 35 km/L"],
+      "sources": ["CPCB BS-VI 2020"]
+    },
+    "auto_rickshaw": {
+      "pm25_ug_per_km": 8.0,
+      "co2_g_per_km": 100.0,
+      "fuel_cost_inr_per_km": 2.5,
+      "assumptions": ["CNG auto, shared ride assumed (factor split downstream if needed)"],
+      "sources": ["CPCB"]
+    },
+    "public_transit_bus": {
+      "pm25_ug_per_km": 1.5,
+      "co2_g_per_km": 20.0,
+      "fuel_cost_inr_per_km": 1.0,
+      "assumptions": ["Per-passenger, 40-passenger load, CNG/electric bus mix"],
+      "sources": ["Delhi DTC fleet mix 2024 (approximate)"]
+    },
+    "public_transit_metro": {
+      "pm25_ug_per_km": 0.2,
+      "co2_g_per_km": 15.0,
+      "fuel_cost_inr_per_km": 0.8,
+      "assumptions": ["Per-passenger, Delhi Metro load factor ~1200 pax/train, 6-car"],
+      "sources": ["DMRC GHG Report 2023 (approximate)"]
+    },
+    "cycle": {
+      "pm25_ug_per_km": 0.0,
+      "co2_g_per_km": 0.0,
+      "fuel_cost_inr_per_km": 0.0,
+      "assumptions": ["Zero direct emissions"],
+      "sources": ["Physics"]
+    },
+    "walk": {
+      "pm25_ug_per_km": 0.0,
+      "co2_g_per_km": 0.0,
+      "fuel_cost_inr_per_km": 0.0,
+      "assumptions": ["Zero direct emissions"],
+      "sources": ["Physics"]
+    }
+  },
+  "exposure": {
+    "_note": "Ambient-to-indoor infiltration factor and breathing rates for exposure calculation. Sources: WHO 2021, US EPA Exposure Handbook.",
+    "outdoor_breathing_rate_m3_per_hour": {
+      "adult_active": 1.3,
+      "adult_rest": 0.6,
+      "child_active": 1.0,
+      "child_rest": 0.5
+    },
+    "indoor_infiltration_fraction": {
+      "sealed_no_purifier": 0.5,
+      "natural_ventilation": 0.8,
+      "air_purifier_hepa": 0.1,
+      "assumptions": ["Infiltration fraction F from Lawrence Berkeley Nat'l Lab (2004) residential infiltration study"],
+      "sources": ["Logue et al. 2012, Indoor Air"]
+    },
+    "n95_mask_efficiency": 0.95,
+    "surgical_mask_efficiency": 0.5,
+    "cloth_mask_efficiency": 0.3,
+    "mask_sources": ["CDC mask guidance 2023", "Lindsley et al. 2021 JAMA"]
+  },
+  "cooking": {
+    "_note": "Indoor PM2.5 emission rates from cooking. Sources: WHO Household Air Pollution Guidelines 2014, TERI India.",
+    "biomass_chulha": {
+      "pm25_mg_per_mj": 150.0,
+      "co2_g_per_mj": 90.0,
+      "fuel_cost_inr_per_meal": 2.0,
+      "assumptions": ["Traditional mud chulha, 3-stone fire; 4 MJ per meal"],
+      "sources": ["WHO HAP Guidelines 2014", "Smith et al. 2014 Lancet"]
+    },
+    "lpg": {
+      "pm25_mg_per_mj": 1.5,
+      "co2_g_per_mj": 55.0,
+      "fuel_cost_inr_per_meal": 12.0,
+      "assumptions": ["14.2 kg LPG cylinder ₹900; ~600 MJ; 3 meals/day"],
+      "sources": ["TERI HAP Study 2019"]
+    },
+    "kerosene": {
+      "pm25_mg_per_mj": 40.0,
+      "co2_g_per_mj": 68.0,
+      "fuel_cost_inr_per_meal": 8.0,
+      "sources": ["WHO HAP Guidelines 2014"]
+    },
+    "electric_coil": {
+      "pm25_mg_per_mj": 0.5,
+      "co2_g_per_mj": 80.0,
+      "fuel_cost_inr_per_meal": 6.0,
+      "assumptions": ["India grid average 0.82 kg CO2/kWh"],
+      "sources": ["CEA 2023"]
+    },
+    "induction": {
+      "pm25_mg_per_mj": 0.1,
+      "co2_g_per_mj": 72.0,
+      "fuel_cost_inr_per_meal": 5.0,
+      "assumptions": ["Higher efficiency (90%) vs electric coil (75%)"],
+      "sources": ["CEA 2023", "BEE India efficiency ratings"]
+    }
+  },
+  "indoor_air": {
+    "_note": "Air purifier and filter sizing. Sources: AHAM, Meena et al. 2021.",
+    "cadr_per_m3_room_volume_ratio": 0.75,
+    "cadr_note": "Recommended CADR (m³/h) = Room volume (m³) × 0.75 for 4 ACH at PM2.5. Source: AHAM AC-1-2015.",
+    "corsi_rosenthal_box": {
+      "estimated_cadr_m3_per_hour": 300,
+      "cost_inr_approximate": 1500,
+      "pm25_reduction_pct_in_room": 55,
+      "assumptions": ["4× MERV-13 20×20 filters + 20-inch box fan. Lab-measured CADR ~300 m³/h. 55% reduction in a 25 m² room from Bliss et al. 2021.", "Filter cost ₹200–300 each, fan ₹600–800 locally."],
+      "sources": ["Bliss et al. 2021 (preprint, Aerosol Science and Technology)", "Corsi-Rosenthal Foundation"]
+    },
+    "ventilation_window_guideline": "Open windows for ventilation only when outdoor AQI < 50 (Green). At AQI 51–100 open briefly (<15 min) in the early morning before 7 AM. At AQI > 100, keep windows closed."
+  }
+}
