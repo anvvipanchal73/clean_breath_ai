@@ -1384,7 +1384,9 @@
       AppState.isSimulated = false;
 
       try {
-        const res = await fetch(`http://localhost:8000/api/v1/air/current?lat=${city.lat}&lon=${city.lon}`);
+        const apiBase = window.CLEANBREATH_API_BASE || (window.location.hostname === "localhost" ? "http://localhost:8000" : "");
+        if (!apiBase) throw new Error("Using client-side Open-Meteo direct");
+        const res = await fetch();
         if (!res.ok) throw new Error("Backend offline");
         const snapshot = await res.json();
         AppState.currentSnapshot = snapshot;
@@ -1422,7 +1424,9 @@
 
     async function fetchForecast(lat, lon) {
       try {
-        const res = await fetch(`http://localhost:8000/api/v1/air/forecast?lat=${lat}&lon=${lon}`);
+        const apiBase = window.CLEANBREATH_API_BASE || (window.location.hostname === "localhost" ? "http://localhost:8000" : "");
+        if (!apiBase) throw new Error("Using client-side forecast direct");
+        const res = await fetch();
         const data = await res.json();
         AppState.currentForecast = data;
         renderForecastChart(data.points || []);
@@ -1637,7 +1641,9 @@
       container.scrollTop = container.scrollHeight;
 
       try {
-        const res = await fetch("http://localhost:8000/api/v1/chat/message", {
+        const apiBase = window.CLEANBREATH_API_BASE || (window.location.hostname === "localhost" ? "http://localhost:8000" : "");
+        if (!apiBase) throw new Error("Using client-side knowledge agent fallback");
+        const res = await fetch(, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
